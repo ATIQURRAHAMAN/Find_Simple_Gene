@@ -1,30 +1,33 @@
 
 /**
- * Write a description of class Part1 here.
+ * Write a description of class Part2 here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Part1{
-
+public class Part2
+{
     public String findSimpleGene(String dna){
         
-        String result = "";
-        int startIndex = dna.indexOf("ATG");
-        if(startIndex == -1){
-            return "";
+    
+        int startCodon = dna.indexOf("ATG");
+        int stopCodon = dna.indexOf("TAA",startCodon+3);
+        while(stopCodon != -1 ){
+            if((stopCodon - startCodon)%3 == 0){
+                
+                 return dna.substring(startCodon,stopCodon+3);
+            
+            }
+            
+            else{
+                
+                stopCodon = dna.indexOf("TAA",startCodon+1);
+            }
+            
         }
-        int stopIndex = dna.indexOf("TAA",startIndex+3);
-        if(stopIndex == -1){
         
-            return "";
-        }
-        result =dna.substring(startIndex,stopIndex+3);
-        
-        
-        return result;
-        
-       
+        return "";
+               
     }
     
     public void testSimpleGene(){
@@ -42,9 +45,5 @@ public class Part1{
         System.out.println("DNA strand is " + dna);
         gene = findSimpleGene(dna);
         System.out.println("Gene is :"+gene);
-    
     }
-
-
-
 }
